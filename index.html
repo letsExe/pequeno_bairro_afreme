@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estrondo - Attack on Titan</title>
+  <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+</head>
+<body>
+  <a-scene fog="type: linear; color: #0f0002; near: 100; far: 500">
+
+    <a-sky position="0 -5 0" rotation="-90 0 0" width="5000" height="1000" color="#8a0b18"></a-sky>
+    <a-plane position="0 -5 0" rotation="-90 0 0" width="5000" height="1000" color="#543b0f"></a-plane>
+
+
+    <!-- Modelo GLB -->
+    <a-entity id="fundador-model" gltf-model="fundador.glb" position="0 0 -5" scale="1 1 1"></a-entity>
+     
+    <a-entity id="titans-container"></a-entity>
+    <a-entity id="titans"></a-entity>
+
+    <a-entity id="camera-rig" position="0 55 160" custom-fly-controls wasd-controls="acceleration: 20">
+      <a-camera look-controls="true"></a-camera>
+    </a-entity>
+
+</a-scene>
+<script>
+  AFRAME.registerComponent('custom-fly-controls', {
+    init: function () {
+      const el = this.el; // A câmera
+      const speed = 1.5; // Velocidade de subida/descida
+      
+      // Escutando pressionamento de teclas
+      window.addEventListener('keydown', function (event) {
+        switch (event.key) {
+          case 'i': // Subir
+            el.object3D.position.y += speed;
+            break;
+          case 'k': // Descer
+            el.object3D.position.y -= speed;
+            break;
+        }
+      });
+    }
+  });
+</script>
+
+<script>
+  // Gera 10 Titãs Colossais
+  const container = document.querySelector('#titans-container');
+  const titanCount = 5;
+  const zStart = 100;
+  const inc = 10;
+
+  for (let i = 0; i < titanCount; i++) {
+    const titan = document.createElement('a-entity');
+    titan.setAttribute('gltf-model', 'colossal.glb');
+    titan.setAttribute('scale', '5 5 5');
+
+    // Gera posições aleatórias para os Titãs
+    const x = 20; 
+    const y = 20; 
+    const z = zStart + i * inc;
+
+    titan.setAttribute('position', `${x} ${y} ${z}`);
+    container.appendChild(titan);
+  }
+</script>
+
+<script>
+  // Gera 10 Titãs Colossais
+  const containe = document.querySelector('#titans');
+  const titanCoun = 5;
+  const zStar = 100;
+  const incre = 10;
+
+  for (let i = 0; i < titanCount; i++) {
+    const titan = document.createElement('a-entity');
+    titan.setAttribute('gltf-model', 'colossal.glb');
+    titan.setAttribute('scale', '5 5 5');
+
+    // Gera posições aleatórias para os Titãs
+    const x = -15; 
+    const y = 20; 
+    const z = zStart + i * inc;
+
+    titan.setAttribute('position', `${x} ${y} ${z}`);
+    container.appendChild(titan);
+  }
+</script>
+
+
+</body>
+</html>
