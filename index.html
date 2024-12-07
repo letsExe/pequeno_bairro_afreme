@@ -1,94 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Estrondo - Attack on Titan</title>
-  <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/0.7.1/aframe.min.js"></script>
+  <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+
 </head>
 <body>
-  <a-scene fog="type: linear; color: #0f0002; near: 100; far: 500">
+  <a-scene>
+    <a-entity environment="preset: arches; groundColor: #5e4008; skyColor: #88c;"></a-entity>
 
-    <a-sky position="0 -5 0" rotation="-90 0 0" width="5000" height="1000" color="#8a0b18"></a-sky>
-    <a-plane position="0 -5 0" rotation="-90 0 0" width="5000" height="1000" color="#543b0f"></a-plane>
+    <!-- Primeira Caixa -->
+    <a-box height="1" width="2" depth="5.5" position="0 0.75 -4.1" rotation="0 0 0" color="#3833bd"></a-box>
 
+    <!-- Segunda Caixa -->
+    <a-box material="color: purple; side: double; transparent: true; opacity: 0.5" rotation="60 0 0" position="0 1.5 -5" color="white" height="1" width="2" depth="0.05"></a-box>
 
-    <!-- Modelo GLB -->
-    <a-entity id="fundador-model" gltf-model="fundador.glb" position="0 0 -5" scale="1 1 1"></a-entity>
-     
-    <a-entity id="titans-container"></a-entity>
-    <a-entity id="titans"></a-entity>
+    <!-- Terceira Caixa -->
+    <a-box height="1" width="2" depth="0.2" position="0 1.25 -2.9" color="#3833bd"></a-box>
 
-    <a-entity id="camera-rig" position="0 55 160" custom-fly-controls wasd-controls="acceleration: 20">
-      <a-camera look-controls="true"></a-camera>
-    </a-entity>
+    <!-- Quarta Caixa -->
+    <a-box height="0.05" width="2" depth="1.8" position="0 1.75 -3.7" color="#3833bd"></a-box>
 
-</a-scene>
-<script>
-  AFRAME.registerComponent('custom-fly-controls', {
-    init: function () {
-      const el = this.el; // A câmera
-      const speed = 1.5; // Velocidade de subida/descida
-      
-      // Escutando pressionamento de teclas
-      window.addEventListener('keydown', function (event) {
-        switch (event.key) {
-          case 'i': // Subir
-            el.object3D.position.y += speed;
-            break;
-          case 'k': // Descer
-            el.object3D.position.y -= speed;
-            break;
-        }
-      });
-    }
-  });
-</script>
+    <!-- Quinta Caixa -->
+    <a-box height="1" width="1" position="0 1.10 -2.5" rotation="-70 0 0" color="#3833bd"></a-box>
 
-<script>
-  // Gera 10 Titãs Colossais
-  const container = document.querySelector('#titans-container');
-  const titanCount = 5;
-  const zStart = 100;
-  const inc = 10;
+    <!-- Esfera -->
+    <a-sphere position="0 1.4 -4" radius="0.25" color="#EF2D5E"></a-sphere>
 
-  for (let i = 0; i < titanCount; i++) {
-    const titan = document.createElement('a-entity');
-    titan.setAttribute('gltf-model', 'colossal.glb');
-    titan.setAttribute('scale', '5 5 5');
+    <!-- Cilindro 1 -->
+    <a-cylinder rotation="90 90 0" position="0 0.5 -2.5" radius="0.5" height="2.75" color="#FFC65D"></a-cylinder>
 
-    // Gera posições aleatórias para os Titãs
-    const x = 20; 
-    const y = 20; 
-    const z = zStart + i * inc;
+    <!-- Cilindro 2 -->
+    <a-cylinder rotation="90 90 0" position="0 0.5 -5.5" radius="0.5" height="2.75" color="#FFC65D"></a-cylinder>
 
-    titan.setAttribute('position', `${x} ${y} ${z}`);
-    container.appendChild(titan);
-  }
-</script>
-
-<script>
-  // Gera 10 Titãs Colossais
-  const containe = document.querySelector('#titans');
-  const titanCoun = 5;
-  const zStar = 100;
-  const incre = 10;
-
-  for (let i = 0; i < titanCount; i++) {
-    const titan = document.createElement('a-entity');
-    titan.setAttribute('gltf-model', 'colossal.glb');
-    titan.setAttribute('scale', '5 5 5');
-
-    // Gera posições aleatórias para os Titãs
-    const x = -15; 
-    const y = 20; 
-    const z = zStart + i * inc;
-
-    titan.setAttribute('position', `${x} ${y} ${z}`);
-    container.appendChild(titan);
-  }
-</script>
-
-
+    <!-- Plano -->
+    <a-plane position="0 -0.2 -4" rotation="-90 0 0" width="100" height="100" color="#7BC8A4"></a-plane>
+  </a-scene>
 </body>
 </html>
